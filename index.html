@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Vending Machine</title>  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+    }
+
+    .logo {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #999;
+    }
+  </style></head><body>  <div class="container"><div class="logo">🥭</div>
+
+<h1>Smart Vending</h1>
+<p>ตู้จำหน่ายสินค้าอัตโนมัติ</p>
+
+<div class="card">
+
+  <button class="btn btn-primary" onclick="goRegister()">
+    สมัครสมาชิก (OTP)
+  </button>
+
+  <button class="btn btn-secondary" onclick="goMenu()">
+    เข้าสู่เมนูสินค้า
+  </button>
+
+</div>
+
+<div class="footer">
+  © 2026 Vending System
+</div>
+
+  </div>  <script>
+    function goRegister() {
+      window.location.href = "register.html";
+    }
+
+    function goMenu() {
+      window.location.href = "menu.html";
+    }
+  </script></body>
+</html>
