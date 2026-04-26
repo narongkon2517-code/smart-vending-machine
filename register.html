@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก</title>  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f5f7fb;
+      padding: 30px;
+    }
+
+    input {
+      padding: 12px;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 12px;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      background: #28a745;
+      color: white;
+      font-size: 16px;
+    }
+  </style></head><body><h2>สมัครสมาชิก</h2><input id="phone" placeholder="เช่น 0912345678">
+<div id="recaptcha-container"></div><button onclick="sendOTP()">ส่ง OTP</button>
+
+<br><input id="otp" placeholder="กรอก OTP">
+<button onclick="verifyOTP()">ยืนยัน</button><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// 🔴 ใส่ config ของคุณตรงนี้
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+// 🔄 แปลงเบอร์อัตโนมัติ
+function formatPhone(phone) {
+  phone = phone.replace(/\D/g, '');
+  if (phone.startsWith('0')) {
+    return '+66' + phone.substring(1);
+  }
+  return phone;
+}
+
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+  size: 'normal'
+});
+
+window.sendOTP = function () {
+  let phone = document.getElementById("phone").value;
+  phone = formatPhone(phone);
+
+  signInWithPhoneNumber(auth, phone, window.recaptchaVerifier)
+    .then((confirmationResult) => {
+      window.confirmationResult = confirmationResult;
+      alert("ส่ง OTP แล้ว");
+    })
+    .catch((error) => {
+      alert("Error: " + error.message);
+    });
+}
+
+window.verifyOTP = function () {
+  const code = document.getElementById("otp").value;
+
+  confirmationResult.confirm(code)
+    .then((result) => {
+      alert("สมัครสำเร็จ!");
+      window.location.href = "menu.html";
+    })
+    .catch((error) => {
+      alert("OTP ไม่ถูกต้อง");
+    });
+}
+</script></body>
+</html>
